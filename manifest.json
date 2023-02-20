@@ -81,7 +81,13 @@
     },
     "vueVersion" : "2",
     "mp-qq" : {
-        "appid" : "1112188613"
+        "appid" : "1112188613",
+        "setting" : {
+            "urlCheck" : true,
+            "minified" : true,
+            "postcss" : true,
+            "es6" : true
+        }
     },
     "locale" : "zh-Hans",
     "fallbackLocale" : "zh-Hans"
