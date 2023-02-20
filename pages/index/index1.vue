@@ -1,19 +1,69 @@
 <template>
-	<view>
-		1111111
+	<view class="max">
+
 		<view class="charts-box">
-			<qiun-data-charts type="line" :opts="opts" :chartData="chartData" />
+			<qiun-data-charts type="line" :opts="opts" :chartData="chartData" :canvas2d="true"
+				canvasId="qakVQkYXThwiUfnMPGMkZkkqjctiuYpN" />
 		</view>
-		2222222
+
+		<view class=" flex flex-col items-center">
+
+			<u-icon name="photo"></u-icon>
+			<u-search shape="round"></u-search>
+
+			<div class="p-7 m-5 bg-red-50">
+				demo
+			</div>
+
+
+			<image class="w-12 h-12" src="../../static/logo.png"></image>
+			<view>
+				<text class="text-[44px] text-gray-800">{{ title }} World</text>
+			</view>
+			<view :class="[
+				flag ? 'bg-red-900' : 'bg-[#fafa00]',
+			]">Toggle</view>
+			<view :class="{
+				'bg-[#fafa00]': flag === true,
+			}">Toggle</view>
+			<view class="p-[20px] -mt-2 mb-[-20px] ">p-[20px] -mt-2 mb-[-20px] margin的jit 不能这么写 -m-[20px]</view>
+			<view class="space-y-[1.6rem]">
+				<view class="w-[300rpx] text-black text-opacity-[0.19]">w-[300rpx] text-black text-opacity-[0.19]</view>
+				<view class="min-w-[300rpx] max-h-[100px] text-[20px] leading-[0.9]">min-w-[300rpx] max-h-[100px]
+					text-[20px] leading-[0.9]</view>
+				<view class="max-w-[300rpx] min-h-[100px] text-[#dddddd]">max-w-[300rpx] min-h-[100px] text-[#dddddd]</view>
+				<view
+					class="flex items-center justify-center h-[100px] w-[100px] rounded-[40px] bg-[#123456] bg-opacity-[0.54] text-[#ffffff]">
+					Hello</view>
+				<view class="border-[10px] border-[#098765] border-solid border-opacity-[0.44]">border-[10px]
+					border-[#098765] border-solid border-opacity-[0.44]</view>
+				<view class="grid grid-cols-3 divide-x-[10px] divide-[#010101] divide-solid">
+					<div>1</div>
+					<div>2</div>
+					<div>3</div>
+				</view>
+				<view class="w-32 py-2 rounded-md font-semibold text-white bg-pink-500 ring-4 ring-pink-300">
+					Default
+				</view>
+			</view>
+
+
+
+
+
+
+		</view>
 	</view>
-	
 </template>
 
 <script>
 import Vue from "vue";
+
 export default Vue.extend({
 	data() {
 		return {
+			title: "Hello",
+			flag: true,
 			chartData: {},
 			//这里的 opts 是图表类型 type="line" 的全部配置参数，您可以将此配置复制到 config-ucharts.js 文件中下标为 ['line'] 的节点中来覆盖全局默认参数。实际应用过程中 opts 只需传入与全局默认参数中不一致的【某一个属性】即可实现同类型的图表显示不同的样式，达到页面简洁的需求。
 			opts: {
@@ -152,12 +202,36 @@ export default Vue.extend({
 				this.chartData = JSON.parse(JSON.stringify(res));
 			}, 500);
 		},
-	}
+	},
+	onLoad() { },
+	methods: {},
 });
 </script>
 
-<style scoped>
-/* 请根据实际需求修改父元素尺寸，组件自动识别宽高 */
+<style>
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo {
+	height: 200rpx;
+	width: 200rpx;
+	margin: 200rpx auto 50rpx auto;
+}
+
+.text-area {
+	display: flex;
+	justify-content: center;
+}
+
+.title {
+	font-size: 36rpx;
+	color: #8f8f94;
+}
+
 .charts-box {
 	width: 100%;
 	height: 300px;
