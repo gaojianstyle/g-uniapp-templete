@@ -30,31 +30,50 @@ export default {
   // border: 1px solid red; 
 }
 
-// pc端内容的最大宽度
-$max-width: 600px;
+// // pc端内容的最大宽度
+// $max-width: 600px;
 
-/*  #ifdef  H5  */
+// /*  #ifdef  H5  */
 
-// 设置pc端两边颜色
-html {
-  background-color: #1E1E1E;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
+// // 设置pc端两边颜色
+// html {
+//   background-color: #1E1E1E;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: #fff;
+// }
+
+// // 设置页面内容居中
+// body {
+//   max-width: $max-width;
+// }
+
+// // 设置页面标题居中
+// .uni-page-head {
+//   max-width: $max-width;
+//   margin: auto !important;
+// }
+
+
+// /*  #endif  */
+
+.cc{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-// 设置页面内容居中
-body {
-  max-width: $max-width;
+.cy{
+	display: flex;
+	align-items: center;
 }
 
-// 设置页面标题居中
-.uni-page-head {
-  max-width: $max-width;
-  margin: auto !important;
+.cx{
+	display: flex;
+	justify-content: center;
 }
 
 
-/*  #endif  */
+
 </style>
