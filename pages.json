@@ -3,15 +3,25 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				// "navigationBarTitleText": "首页",
+				"navigationStyle": "custom" //小程序沉浸式导航栏/顶部组件占满导航栏
 			}
 		}
 	],
 	"globalStyle": {
+		// "navigationBarTextStyle": "black",
+		// "navigationBarTitleText": "首页",
+		// "navigationBarBackgroundColor": "#F8F8F8",
+		// "backgroundColor": "#F8F8F8"
+
+
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#fff",
+		"backgroundColor": "#fff",
+		"app-plus": {
+			"titleNView": false //禁用原生导航栏  
+		}
 	},
 	"uniIdRouter": {}
 }
