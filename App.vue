@@ -30,10 +30,10 @@ export default {
   // border: 1px solid red; 
 }
 
-// // pc端内容的最大宽度
-// $max-width: 600px;
+// pc端内容的最大宽度
+$max-width: 600px;
 
-// /*  #ifdef  H5  */
+/*  #ifdef  H5  */
 
 // // 设置pc端两边颜色
 // html {
@@ -56,7 +56,7 @@ export default {
 // }
 
 
-// /*  #endif  */
+/*  #endif  */
 
 .cc{
 	display: flex;
