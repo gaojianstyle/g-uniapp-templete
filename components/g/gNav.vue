@@ -30,7 +30,7 @@
 		<!-- ////////////////////////////////////////////////////////////////////////// -->
 
 		<!-- #ifndef APP-PLUS || H5-->
-		<!-- 除了app和h5不显示,其他平台都显示 -->
+		<!-- 除了app和h5不显示,其他平台都显示,有一个隐患:没有测试支付宝小程序,支付宝可能不支持胶囊-->
 		<!-- <view class="bg" :style="{height:searchBarTop + 'px'}"></view> -->
 		<view class="bg nav cc" :style="{
 			marginTop: searchBarTop + 'px',
@@ -70,7 +70,7 @@
 			}
 		},
 		created() {
-			console.log('组件初始化完成');
+			// console.log('组件初始化完成');
 			
 			/**
 			 * !小程序胶囊信息
@@ -87,11 +87,11 @@
 			 */
 			uni.getSystemInfo({
 				success: (e) => {
-					console.log(e)
+					// console.log(e)
 					// 获取手机状态栏高度
 					let statusBar = e.statusBarHeight;
 					this.statusBar = statusBar;
-					console.log(`获取手机状态栏高度:`, this.statusBar)
+					// console.log(`获取手机状态栏高度:`, this.statusBar)
 				}
 			})
 			
