@@ -53,12 +53,20 @@
 </template>
 
 <script>
-	import {play_mp3} from '@/utils/playMp3.js'
-	
+	import {
+		play_mp3
+	} from '@/utils/playMp3.js'
+	import {
+		mapState,
+		mapGetters,
+		mapMutations,
+		mapActions
+	} from 'vuex'
+
 	export default {
 		data() {
 			return {
-				selectedIndex: 0, // 标记
+				// selectedIndex: 0, // 标记
 				showselected: true, // 是否在页面使用tarBar
 				tabBar: {
 					list: [{
@@ -72,7 +80,7 @@
 							"pagePath": "pages/index/index",
 							"iconPath": require("@/static/g/2.svg"),
 							"selectedIconPath": require("@/static/g/2.1.svg"),
-							"text": "图标",
+							"text": "图表",
 							"index": 1
 						},
 						{
@@ -101,15 +109,18 @@
 
 			}
 		},
+		computed: {
+			...mapState('gTabbar', {
+				selectedIndex:'selectedIndex'
+			})
+		},
 		methods: {
+			...mapMutations('gTabbar',['updateSelectedIndex']),
 			tabbarSelect: function(index) {
 				play_mp3();
 				uni.vibrateShort();
-				this.selectedIndex = index;
-				// const innerAudioContext = uni.createInnerAudioContext();
-				// innerAudioContext.src =  '../../static/g/1.mp3'; // 本地音乐文件绝对路径
-				// innerAudioContext.play();
-				
+				this.updateSelectedIndex(index)
+				// console.log(this.selectedIndex,this.$store.state.gTabbar.selectedIndex)
 			},
 			onFeedTap: function() {
 				let platform = uni.getSystemInfoSync().platform

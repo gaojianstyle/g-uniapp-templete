@@ -5,9 +5,20 @@
 		<gNavbar title="首页"></gNavbar>
 		
 		
+		{{index}},,,{{$store.state.gTabbar.index}}
+		<!-- {{$store.gTabbar.index}} -->
+		<hr>
+		{{text1}}
+		<hr>
+		{{getindex}}?
+		<hr>
+		{{age}}
+		<view class="flex">
+			<button @click="add(1)">1</button>
+			<button @click="add2(10)">2</button>
+		</view>
 		
 		
-		{{selectedIndex}}
 		
 		
 		
@@ -40,20 +51,24 @@
 			}
 		},
 		computed: {
+			...mapState(['age']),
 			...mapState('gTabbar',[
-				'selectedIndex'
+				'index'
 			]),
 			...mapState('gTabbar',{
+				text1: 'text1'
 			}),
-			...mapGetters('gTabbar',[
-				
-			]),
+			...mapGetters('gTabbar',{
+				getindex: 'getindex'
+			}),
 		},
 
 		methods: {
 			...mapMutations('gTabbar',{
+				add: 'demo_add'
 			}),
 			...mapActions('gTabbar',{
+				add2: 'demo_add2'
 			})
 		},
 		created() {
