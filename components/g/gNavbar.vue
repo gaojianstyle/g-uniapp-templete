@@ -1,91 +1,134 @@
-<!-- 导航条模板 -->
 <template>
-    <view class="ua__navbar">
-        <view class="ua__navbar-wrap" :class="{'custom': custom, 'fixed': fixed || transparent}"
-            :style="{'height': customBarH + 'px', 'padding-top': (custom ? statusBarH : 0) + 'px', 'background': bgcolor, 'color': color, 'z-index': zIndex}">
-            <!-- //左侧 (返回) -->
-            <view class="action navbar-action__left" v-if="back && back!='false'" @click="onBack">
-                <template v-if="$slots.back">
-                    <slot name="back" />
-                </template>
-                <template v-else><text class="iconfont nvuefont"
-                        :style="{'color': color}">{{'\ue84c'}}</text></template>
-                <slot name="backText" />
-            </view>
-            <slot name="left" />
+	<view class="max">
 
-            <!-- //标题 -->
-            <view v-if="!search" class="navbar-title" :class="{'center': center}">
-                <template v-if="$slots.title">
-                    <slot name="title" />
-                </template>
-                <template v-else><text :style="{'color': color}">{{title}}</text></template>
-            </view>
 
-            <!-- //搜索框 -->
-            <view v-if="search" class="action navbar-action__search">
-                <slot name="search" />
-            </view>
+		<!-- demo -->
+		<!-- <view class="nav cc" :style="{marginTop:searchBarTop + 'px',height:searchBarHeight + 'px'}">
+			{{title}}
+		</view> -->
 
-            <!-- //右侧 -->
-            <view class="action navbar-action__right">
-                <slot name="right" />
-            </view>
-        </view>
-    </view>
+
+
+
+		<!-- 小程序 -->
+
+		<!-- #ifdef APP-PLUS || H5-->
+		<!-- 只在app和h5显示 -->
+		
+		<view class="bg nav nav-app cc " :style="{
+			marginTop: statusBar + 'px',
+			height: 33 + 'px',
+		}">
+			{{title}}
+		</view>
+		<view class="center bg " :style="{
+			height: statusBar + 33 + 7  + 'px',
+		}"></view>
+		
+		<!--  #endif  -->
+
+		<!-- ////////////////////////////////////////////////////////////////////////// -->
+
+		<!-- #ifndef APP-PLUS || H5-->
+		<!-- 除了app和h5不显示,其他平台都显示,有一个隐患:没有测试支付宝小程序,支付宝可能不支持胶囊-->
+		<!-- <view class="bg" :style="{height:searchBarTop + 'px'}"></view> -->
+		<view class="bg nav cc" :style="{
+			marginTop: searchBarTop + 'px',
+			height: searchBarHeight + 'px',
+		}">
+			{{title}}
+		</view>
+		<view class="center bg " :style="{
+			paddingTop: searchBarTop + searchBarHeight + 7 + 'px'
+		}">
+		</view>
+		<!--  #endif  -->
+
+
+
+
+	</view>
 </template>
 
 <script>
-    export default {
-        props: {
-            // 是否采用自定义导航模式
-            custom: { type: [Boolean, String], default: false },
-            // 是否返回
-            back: { type: [Boolean, String], default: true },
-            // 标题
-            title: { type: String, default: '' },
-            // 标题颜色
-            color: { type: String, default: '#353535' },
-            // 背景色
-            bgcolor: { type: String, default: '#fff' },
-            // 标题是否居中
-            center: { type: [Boolean, String], default: false },
-            // 搜索框
-            search: { type: [Boolean, String], default: false },
-            // 是否固定导航
-            fixed: { type: [Boolean, String], default: false },
-            // 是否背景透明
-            transparent: { type: [Boolean, String], default: false },
-            // 设置层叠
-            zIndex: { type: [Number, String], default: '2022' },
-        },
-        data() {
-            return {
-                statusBarH: 0,
-                customBarH: 0,
-            }
-        },
-        beforeCreate() {
-            // #ifdef APP-NVUE
-            var domModule = weex.requireModule('dom');
-            domModule.addRule('fontFace', {
-                'fontFamily': "nvueIcon",
-                'src': "url('/static/fonts/iconfont.ttf')"
-            });
-            // #endif
-        },
-        created() {
-            const app = getApp()
-            // 获取状态栏和导航条高度
-            this.statusBarH = app.globalData.statusBarH
-            this.customBarH = this.custom ? app.globalData.customBarH : app.globalData.customBarH - this.statusBarH
-        },
-        methods: {
-            onBack() {
-                uni.navigateBack({
-                    delta: 1
-                })
-            }
-        }
-    }
+	export default {
+		data() {
+			return {
+				searchBarTop: 0, //搜索栏的外边框高度，单位px
+				searchBarHeight: 0, //搜索栏的高度，单位px
+				statusBar: 0, //手机状态栏高度
+			}
+		},
+		props: {
+			"title": {
+				type: String,
+				required: true,
+				default: "默认标题"
+			},
+			"bgColor": {
+				default: "默认标题"
+			}
+		},
+		created() {
+			// console.log('组件初始化完成');
+			
+			/**
+			 * !小程序胶囊信息
+			 */
+			// #ifndef H5 || APP-PLUS || MP-ALIPAY
+			// H5 || APP-PLUS || MP-ALIPAY 不支持胶囊按钮样式的API
+			let menuButtonInfo = uni.getMenuButtonBoundingClientRect();
+			this.searchBarTop = menuButtonInfo.top;
+			this.searchBarHeight = menuButtonInfo.height;
+			// #endif
+			
+			/**
+			 * 
+			 */
+			uni.getSystemInfo({
+				success: (e) => {
+					// console.log(e)
+					// 获取手机状态栏高度
+					let statusBar = e.statusBarHeight;
+					this.statusBar = statusBar;
+					// console.log(`获取手机状态栏高度:`, this.statusBar)
+				}
+			})
+			
+
+		}
+	}
 </script>
+
+<style lang="scss" scoped>
+	* {
+		// border: 1px solid red;
+	}
+
+	.max {}
+
+	.nav {
+		position: fixed;
+		top: 0rpx;
+		left: 0rpx;
+		z-index: 9999;
+		width: 100%;
+		height: 30px;
+		padding: 7px 0px;
+		font-weight: 700;
+		position: block;
+		
+	}
+	.nav-app{
+	}
+
+	.bg {
+		// background-color: red;
+		// 背景透明
+		background-color: rgba(255, 0, 0, 0);
+		// background-color: blue;
+	}
+	.bg-demo{
+		// background-color:red !important;
+	}
+</style>

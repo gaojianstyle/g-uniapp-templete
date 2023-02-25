@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 
 import moduleA from '@/store/modules/moduleA'
 import moduleB from '@/store/modules/moduleB'
+import gTabbar from '@/store/modules/g/gTabbar'
 
 Vue.use(Vuex); //vue的插件机制
 
@@ -11,7 +12,8 @@ Vue.use(Vuex); //vue的插件机制
 export default new Vuex.Store({
 	modules: {
 		moduleA,
-		moduleB
+		moduleB,
+		gTabbar
 	},
 	state: { //存放状态
 		"username": "foo",
